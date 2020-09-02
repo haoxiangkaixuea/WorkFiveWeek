@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">WorkFiveWeek</string>
+    <string name="input_text">请输入想要加密的信息</string>
+    <string name="lock">加密</string>
+    <string name="unlock">解密</string>
+    <string name="MD5">MD5</string>
+    <string name="AEC">AEC</string>
+    <string name="RSA">RSA</string>
+    <string name="username">请输入用户名</string>
+    <string name="password">请输入密码</string>
 </resources>

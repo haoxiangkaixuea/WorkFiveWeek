@@ -101,8 +101,7 @@ public class MD5Util {
         // MD5
         String s1 = string2MD5(str);
         //加密
-        //String s1 = MD5(str);
-
+        String s2 = MD5(str);
 
         String s = str;
 
@@ -113,11 +112,10 @@ public class MD5Util {
         // return convertMD5(convertMD5(s));
         return convertMD5(s);
         //return string2MD5(s);
-
     }
 
-    public String decode(String jiemi) {
-        Log.e(TAG, "这是解密--------------*****---------" + convertMD5(jiemi));
-        return convertMD5(jiemi);
+    public String decode(String unlock) {
+        Log.e(TAG, "这是解密--------------*****---------" + convertMD5(unlock));
+        return convertMD5(unlock);
     }
 }
