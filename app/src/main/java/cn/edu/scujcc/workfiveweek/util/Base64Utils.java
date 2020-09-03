@@ -27,14 +27,11 @@ public class Base64Utils {
             int d = ((((int) data[i]) & 0x0ff) << 16)
                     | ((((int) data[i + 1]) & 0x0ff) << 8)
                     | (((int) data[i + 2]) & 0x0ff);
-
             buf.append(LEGAL_CHARS[(d >> 18) & 63]);
             buf.append(LEGAL_CHARS[(d >> 12) & 63]);
             buf.append(LEGAL_CHARS[(d >> 6) & 63]);
             buf.append(LEGAL_CHARS[d & 63]);
-
             i += 3;
-
             if (n++ >= 14) {
                 n = 0;
                 buf.append(" ");
@@ -44,14 +41,12 @@ public class Base64Utils {
         if (i == start + len - 2) {
             int d = ((((int) data[i]) & 0x0ff) << 16)
                     | ((((int) data[i + 1]) & 255) << 8);
-
             buf.append(LEGAL_CHARS[(d >> 18) & 63]);
             buf.append(LEGAL_CHARS[(d >> 12) & 63]);
             buf.append(LEGAL_CHARS[(d >> 6) & 63]);
             buf.append("=");
         } else if (i == start + len - 1) {
             int d = (((int) data[i]) & 0x0ff) << 16;
-
             buf.append(LEGAL_CHARS[(d >> 18) & 63]);
             buf.append(LEGAL_CHARS[(d >> 12) & 63]);
             buf.append("==");
@@ -104,9 +99,7 @@ public class Base64Utils {
 
     private static void decode(String s, OutputStream os) throws IOException {
         int i = 0;
-
         int len = s.length();
-
         while (true) {
             while (i < len && s.charAt(i) <= ' ') {
                 i++;
@@ -127,7 +120,6 @@ public class Base64Utils {
                 break;
             }
             os.write(tri & 255);
-
             i += 4;
         }
     }
