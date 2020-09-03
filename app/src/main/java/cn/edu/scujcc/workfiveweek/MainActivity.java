@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnRSA = findViewById(R.id.button_rsa);
         Button btnSecretSharedPreference = findViewById(R.id.button_SecretSharedPreference);
         btnSecretSharedPreference.setOnClickListener(v -> {
-            Intent startSpIntent = new Intent(MainActivity.this, SecretSharedPreference.class);
+            Intent startSpIntent = new Intent(MainActivity.this, SharedPreferenceActivity.class);
             startActivity(startSpIntent);
         });
         btnAidl.setOnClickListener(v -> {

@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AidlActivity" />
         <activity android:name=".RsaActivity" />
-        <activity android:name=".SecretSharedPreference" />
+        <activity android:name=".SharedPreferenceActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -11,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Map;
 
-import cn.edu.scujcc.workfiveweek.sp.SecuritySharedPreference;
-
-public class SecretSharedPreference extends AppCompatActivity {
+public class SharedPreferenceActivity extends AppCompatActivity {
     private static final String TAG = "SecretSharedPreference";
     private EditText inputUsername;
     private EditText inputPassword;
@@ -23,7 +21,7 @@ public class SecretSharedPreference extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_secret_shared_preference);
+        setContentView(R.layout.activity_shared_preference);
 
         inputUsername = findViewById(R.id.editText_username);
         inputPassword = findViewById(R.id.editText_password);
