@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">WorkFiveWeek</string>
-    <string name="input_text">请输入想要加密的信息</string>
+    <string name="input_text">请输入想要加密的MD5信息</string>
     <string name="lock">加密</string>
     <string name="unlock">解密</string>
     <string name="MD5">MD5</string>

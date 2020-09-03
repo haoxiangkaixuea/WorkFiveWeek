@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import cn.edu.scujcc.workfiveweek.util.MD5Util;
+import cn.edu.scujcc.workfiveweek.util.MD5Utils;
 
 /**
  * 自动加密SharedPreference
@@ -68,8 +68,8 @@ public class SecuritySharedPreference implements SharedPreferences {
      * @return cipherText base64
      */
     private String encryptPreference(String plainText) {
-        MD5Util md5Util = new MD5Util();
-        return md5Util.encrypt(plainText);
+        MD5Utils md5Utils = new MD5Utils();
+        return md5Utils.encrypt(plainText);
     }
 
     /**
@@ -78,8 +78,8 @@ public class SecuritySharedPreference implements SharedPreferences {
      * @return plainText
      */
     private String decryptPreference(String cipherText) {
-        MD5Util md5Util = new MD5Util();
-        return md5Util.decode(cipherText);
+        MD5Utils md5Utils = new MD5Utils();
+        return md5Utils.decode(cipherText);
     }
 
     @Nullable
@@ -267,11 +267,7 @@ public class SecuritySharedPreference implements SharedPreferences {
         @Override
         @TargetApi(Build.VERSION_CODES.GINGERBREAD)
         public void apply() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-                mEditor.apply();
-            } else {
-                commit();
-            }
+            mEditor.apply();
         }
     }
 }

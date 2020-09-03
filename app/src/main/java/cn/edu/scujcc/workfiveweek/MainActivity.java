@@ -1,5 +1,6 @@
 package cn.edu.scujcc.workfiveweek;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -9,14 +10,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cn.edu.scujcc.workfiveweek.util.AesUtils;
-import cn.edu.scujcc.workfiveweek.util.MD5Util;
+import cn.edu.scujcc.workfiveweek.util.MD5Utils;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private MD5Util md5Util = new MD5Util();
+    private MD5Utils md5Utils = new MD5Utils();
     private TextView tvLock, tvUnlock;
     private EditText inputLock;
     private Button btnMD5, btnAES, btnRSA;
+    private Button btnSecretSharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         btnMD5 = findViewById(R.id.button_md5);
         btnAES = findViewById(R.id.button_aes);
         btnRSA = findViewById(R.id.button_rsa);
+        btnSecretSharedPreference = findViewById(R.id.button_SecretSharedPreference);
+        btnSecretSharedPreference.setOnClickListener(v -> {
+            Intent startSpIntent = new Intent(MainActivity.this, SecretSharedPreference.class);
+            startActivity(startSpIntent);
+        });
 
         btnMD5.setOnClickListener(v -> setMD5());
         btnAES.setOnClickListener(v -> {
@@ -38,11 +45,10 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         });
-        btnRSA.setOnClickListener(v -> setRSA());
-    }
-
-    private void setRSA() {
-
+        btnRSA.setOnClickListener(v -> {
+            Intent startRsaIntent = new Intent(MainActivity.this, RsaActivity.class);
+            startActivity(startRsaIntent);
+        });
     }
 
     private void setAES() throws Exception {
@@ -62,12 +68,12 @@ public class MainActivity extends AppCompatActivity {
     private void setMD5() {
         String getData = inputLock.getText().toString().trim();
         Log.d(TAG, "这是加密前的数据" + getData);
-        String md5 = MD5Util.string2MD5(getData);
+        String md5 = MD5Utils.string2MD5(getData);
         Log.d(TAG, "这是MD5后的数据" + md5);
-        String md5Lock = md5Util.encrypt(getData);
+        String md5Lock = md5Utils.encrypt(getData);
         Log.d(TAG, "这是加密后的数据" + md5Lock);
         tvLock.setText(md5Lock);
-        String md5Unlock = md5Util.decode(md5Lock);
+        String md5Unlock = md5Utils.decode(md5Lock);
         tvUnlock.setText(md5Unlock);
         Log.d(TAG, "这是解密后的数据" + md5Unlock);
     }

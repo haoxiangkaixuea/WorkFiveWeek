@@ -7,7 +7,7 @@ import java.security.MessageDigest;
 /**
  * @author Administrator
  */
-public class MD5Util {
+public class MD5Utils {
     private static final String TAG = "MD5Util";
 
     /***
