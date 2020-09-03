@@ -9,18 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RsaActivity"></activity>
-        <activity android:name=".SecretSharedPreference">
-
-        </activity>
+        <activity android:name=".AidlActivity" />
+        <activity android:name=".RsaActivity" />
+        <activity android:name=".SecretSharedPreference" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
+        <service
+            android:name=".RemoteService"
+            android:process=":remote" />
     </application>
 
 </manifest>

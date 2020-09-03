@@ -87,7 +87,7 @@ signingConfigs {
 
 - 用途一：统计不同渠道的数据，方便在推广运营过程中进行有效的渠道比较。来评估渠道的质量。
 - 用途二：对于APP内部有分享邀请好友送奖励的活动，需要进行渠道标识，免除用户手动输入邀请码的流程。
-   简化用户注册步骤，减少因注册步骤太繁琐而导致的用户流失。
+  简化用户注册步骤，减少因注册步骤太繁琐而导致的用户流失。
 - 用途三：部分游戏要进行分渠道的推广，需要进行分包统计。
 - 分包的方式：
   - 客户端打多个渠道包：以下方式都使用
@@ -106,9 +106,9 @@ signingConfigs {
   - 原理：清单文件添加渠道标签读取对应值。
   - 打包后修改渠道值的两种方法
   - 第一种方法：
-     通过ApkTool进行解包，然后修改AndroidManifest中修改渠道标示，最后再通过ApkTool进行打包、签名。
+    通过ApkTool进行解包，然后修改AndroidManifest中修改渠道标示，最后再通过ApkTool进行打包、签名。
   - 第二种方法：
-     使用AXML解析器axmleditor.jar，拥有很弱的编辑功能，工程中用来编辑二进制格式的 AndroidManifest.xml 文件.
+    使用AXML解析器axmleditor.jar，拥有很弱的编辑功能，工程中用来编辑二进制格式的 AndroidManifest.xml 文件.
 
 - 4、美团多渠道打包
   - 1、直接将apk文件解压缩，然后在META-INF中间中添加以渠道名命名的空文件。
@@ -322,4 +322,90 @@ IPC不是Android中所独有的，任何一个操作系统都需要相应的IPC�
 
 由于应用程序之间不能共享内存。在不同应用程序之间交互数据（跨进程通讯），在android SDK中提供了4种用于跨进程通讯的方式。这4种方式正好对应于android系统中4种应用程序组件：Activity、Content Provider、Broadcast和Service。其中Activity可以跨进程调用其他应用程序的Activity；Content Provider可以跨进程访问其他应用程序中的数据（以Cursor对象形式返回），当然，也可以对其他应用程序的数据进行增、删、改操 作；Broadcast可以向android系统中所有应用程序发送广播，而需要跨进程通讯的应用程序可以监听这些广播；Service和Content Provider类似，也可以访问其他应用程序中的数据，但不同的是，Content Provider返回的是Cursor对象，而Service返回的是Java对象，这种可以跨进程通讯的服务叫AIDL服务。
 
+**Activity**
+
+ Activity的跨进程访问与进程内访问略有不同。虽然它们都需要Intent对象，但跨进程访问并不需要指定Context对象和Activity的 Class对象，而需要指定的是要访问的Activity所对应的Action（一个字符串）。有些Activity还需要指定一个Uri（通过 Intent构造方法的第2个参数指定）。
+
+在android系统中有很多应用程序提供了可以跨进程访问的Activity，例如，下面的代码可以直接调用拨打电话的Activity。
+
+```java
+    Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:12345678" ); 
+    startActivity(callIntent);
+```
+
+**Content Provider** 
+
+   Android应用程序可以使用文件或SqlLite数据库来存储数据。Content Provider提供了一种在多个应用程序之间数据共享的方式（跨进程共享数据）。应用程序可以利用Content Provider完成下面的工作
+
+1. 查询数据
+2. 修改数据
+3. 添加数据
+4. 删除数据
+
+​     虽然Content Provider也可以在同一个应用程序中被访问，但这么做并没有什么意义。Content Provider存在的目的向其他应用程序共享数据和允许其他应用程序对数据进行增、删、改操作。
+Android系统本身提供了很多Content Provider，例如，音频、视频、联系人信息等等。我们可以通过这些Content Provider获得相关信息的列表。这些列表数据将以Cursor对象返回。因此，从Content Provider返回的数据是二维表的形式。
+
+**广播（Broadcast）** 
+   广播是一种被动跨进程通讯的方式。当某个程序向系统发送广播时，其他的应用程序只能被动地接收广播数据。这就象电台进行广播一样，听众只能被动地收听，而不能主动与电台进行沟通。
+在应用程序中发送广播比较简单。只需要调用sendBroadcast方法即可。该方法需要一个Intent对象。通过Intent对象可以发送需要广播的数据。
+
+**Service**
+
+利用AIDL Service实现跨进程通信,它相比Broadcast而言，虽然实现上稍微麻烦了一点，但是它的优势就是不会像广播那样在手机中的广播较多时会有明显的时延，甚至有广播发送不成功的情况出现。 
+
+要注意的是普通的Service并不能实现跨进程操作，实际上普通的Service和它所在的应用处于同一个进程中，而且它也不会专门开一条新的线程，因此如果在普通的Service中实现在耗时的任务，需要新开线程。
+
+要实现跨进程通信，需要借助AIDL(Android Interface Definition Language)。Android中的跨进程服务其实是采用C/S的[架构，因而AIDL的目的就是实现通信接口。
+
 #### AIDL
+
+**AIDL(Android Interface Definition Language)**, 即Android接口定义语言. 在Android中, AIDL是跨进程通信的主要实现方式. 我们同样也可以使用AIDL, 实现自己的跨进程方案. 本文介绍AIDL的使用方式.
+
+服务端: 创建Service服务监听客户端的请求, 实现AIDL接口.
+
+客户端: 绑定服务端, 调用AIDL的方法.
+
+AIDL接口: 跨进程通信的接口, AIDL的包名需要与项目的包名相同, 默认生成即可.
+
+AIDL支持的数据类型: 基本类型, 字符串类型(String&CharSequence), List, Map, Parcelable, AIDL接口. 共六种.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

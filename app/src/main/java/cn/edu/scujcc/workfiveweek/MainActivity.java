@@ -17,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private MD5Utils md5Utils = new MD5Utils();
     private TextView tvLock, tvUnlock;
     private EditText inputLock;
-    private Button btnMD5, btnAES, btnRSA;
-    private Button btnSecretSharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +26,19 @@ public class MainActivity extends AppCompatActivity {
         tvLock = findViewById(R.id.text_lock);
         tvUnlock = findViewById(R.id.text_unlock);
         inputLock = findViewById(R.id.editText_input);
-        btnMD5 = findViewById(R.id.button_md5);
-        btnAES = findViewById(R.id.button_aes);
-        btnRSA = findViewById(R.id.button_rsa);
-        btnSecretSharedPreference = findViewById(R.id.button_SecretSharedPreference);
+        Button btnAidl = findViewById(R.id.button_aidl);
+        Button btnMD5 = findViewById(R.id.button_md5);
+        Button btnAES = findViewById(R.id.button_aes);
+        Button btnRSA = findViewById(R.id.button_rsa);
+        Button btnSecretSharedPreference = findViewById(R.id.button_SecretSharedPreference);
         btnSecretSharedPreference.setOnClickListener(v -> {
             Intent startSpIntent = new Intent(MainActivity.this, SecretSharedPreference.class);
             startActivity(startSpIntent);
         });
-
+        btnAidl.setOnClickListener(v -> {
+            Intent startAidlIntent = new Intent(MainActivity.this, AidlActivity.class);
+            startActivity(startAidlIntent);
+        });
         btnMD5.setOnClickListener(v -> setMD5());
         btnAES.setOnClickListener(v -> {
             try {
