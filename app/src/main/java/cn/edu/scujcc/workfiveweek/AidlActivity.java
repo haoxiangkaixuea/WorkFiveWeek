@@ -15,7 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
+/**
+ * @author Administrator
+ */
 public class AidlActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "AidlActivity";
     private Button startBtn;
     private EditText codeEt;
     private EditText nameEt;

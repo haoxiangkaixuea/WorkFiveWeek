@@ -13,7 +13,7 @@ public class MD5Utils {
      */
     public static String string2MD5(String inStr) {
         LogUtils.d(TAG, "string2MD5: -------------------------");
-        MessageDigest md5 = null;
+        MessageDigest md5;
         try {
             md5 = MessageDigest.getInstance("MD5");
         } catch (Exception e) {
@@ -29,8 +29,8 @@ public class MD5Utils {
         }
         byte[] md5Bytes = md5.digest(byteArray);
         StringBuffer hexValue = new StringBuffer();
-        for (int i = 0; i < md5Bytes.length; i++) {
-            int val = ((int) md5Bytes[i]) & 0xff;
+        for (byte md5Byte : md5Bytes) {
+            int val = ((int) md5Byte) & 0xff;
             if (val < 16) {
                 hexValue.append("0");
             }
@@ -50,8 +50,7 @@ public class MD5Utils {
         for (int i = 0; i < a.length; i++) {
             a[i] = (char) (a[i] ^ 't');
         }
-        String s = new String(a);
-        return s;
+        return new String(a);
 
     }
 
@@ -94,7 +93,9 @@ public class MD5Utils {
         }
     }
 
-    //encrypt译成密码
+    /**
+     * encrypt译成密码
+     */
     public String encrypt(String str) {
         // MD5
         String s1 = string2MD5(str);

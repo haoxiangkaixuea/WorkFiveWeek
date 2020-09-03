@@ -6,10 +6,12 @@ import java.io.OutputStream;
 
 /**
  * Base64工具类
+ *
+ * @author Administrator
  */
 public class Base64Utils {
 
-    private static final char[] legalChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+    private static final char[] LEGAL_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
             .toCharArray();
 
     public static String encode(byte[] data) {
@@ -26,10 +28,10 @@ public class Base64Utils {
                     | ((((int) data[i + 1]) & 0x0ff) << 8)
                     | (((int) data[i + 2]) & 0x0ff);
 
-            buf.append(legalChars[(d >> 18) & 63]);
-            buf.append(legalChars[(d >> 12) & 63]);
-            buf.append(legalChars[(d >> 6) & 63]);
-            buf.append(legalChars[d & 63]);
+            buf.append(LEGAL_CHARS[(d >> 18) & 63]);
+            buf.append(LEGAL_CHARS[(d >> 12) & 63]);
+            buf.append(LEGAL_CHARS[(d >> 6) & 63]);
+            buf.append(LEGAL_CHARS[d & 63]);
 
             i += 3;
 
@@ -43,15 +45,15 @@ public class Base64Utils {
             int d = ((((int) data[i]) & 0x0ff) << 16)
                     | ((((int) data[i + 1]) & 255) << 8);
 
-            buf.append(legalChars[(d >> 18) & 63]);
-            buf.append(legalChars[(d >> 12) & 63]);
-            buf.append(legalChars[(d >> 6) & 63]);
+            buf.append(LEGAL_CHARS[(d >> 18) & 63]);
+            buf.append(LEGAL_CHARS[(d >> 12) & 63]);
+            buf.append(LEGAL_CHARS[(d >> 6) & 63]);
             buf.append("=");
         } else if (i == start + len - 1) {
             int d = (((int) data[i]) & 0x0ff) << 16;
 
-            buf.append(legalChars[(d >> 18) & 63]);
-            buf.append(legalChars[(d >> 12) & 63]);
+            buf.append(LEGAL_CHARS[(d >> 18) & 63]);
+            buf.append(LEGAL_CHARS[(d >> 12) & 63]);
             buf.append("==");
         }
 
@@ -94,7 +96,6 @@ public class Base64Utils {
         byte[] decodedBytes = bos.toByteArray();
         try {
             bos.close();
-            bos = null;
         } catch (IOException ex) {
             System.err.println("Error while decoding BASE64: " + ex.toString());
         }

@@ -44,8 +44,9 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
     public void textRSA() {
         text = getResources().getString(R.string.test_RSA);
 
-        KeyPair keyPair = RSAUtils.generateRSAKeyPair(RSAUtils.DEFAULT_KEY_SIZE);
+        KeyPair keyPair = RSAUtils.generateRsaKeyPair(RSAUtils.DEFAULT_KEY_SIZE);
         // 公钥
+        assert keyPair != null;
         publicKey = (RSAPublicKey) keyPair.getPublic();
         // 私钥
         privateKey = (RSAPrivateKey) keyPair.getPrivate();

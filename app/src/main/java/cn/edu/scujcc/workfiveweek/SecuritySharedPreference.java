@@ -1,5 +1,6 @@
 package cn.edu.scujcc.workfiveweek;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,6 +20,8 @@ import cn.edu.scujcc.workfiveweek.util.MD5Utils;
 
 /**
  * 自动加密SharedPreference
+ *
+ * @author Administrator
  */
 
 public class SecuritySharedPreference implements SharedPreferences {
@@ -187,6 +190,7 @@ public class SecuritySharedPreference implements SharedPreferences {
         /**
          * constructor
          */
+        @SuppressLint("CommitPrefEdits")
         private SecurityEditor() {
             mEditor = mSharedPreferences.edit();
         }
