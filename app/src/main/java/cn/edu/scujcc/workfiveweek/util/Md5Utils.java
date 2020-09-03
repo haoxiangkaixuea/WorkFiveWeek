@@ -5,13 +5,13 @@ import java.security.MessageDigest;
 /**
  * @author Administrator
  */
-public class MD5Utils {
+public class Md5Utils {
     private static final String TAG = "MD5Util";
 
     /***
      * MD5加码 生成32位md5码
      */
-    public static String string2MD5(String inStr) {
+    public static String string2Md5(String inStr) {
         LogUtils.d(TAG, "string2MD5: -------------------------");
         MessageDigest md5;
         try {
@@ -28,7 +28,7 @@ public class MD5Utils {
             byteArray[i] = (byte) charArray[i];
         }
         byte[] md5Bytes = md5.digest(byteArray);
-        StringBuffer hexValue = new StringBuffer();
+        StringBuilder hexValue = new StringBuilder();
         for (byte md5Byte : md5Bytes) {
             int val = ((int) md5Byte) & 0xff;
             if (val < 16) {
@@ -44,7 +44,7 @@ public class MD5Utils {
     /**
      * 加密解密算法 执行一次加密，两次解密
      */
-    public static String convertMD5(String inStr) {
+    public static String convertMd5(String inStr) {
         LogUtils.e(TAG, "convertMD5: ----------------------------------------------------------");
         char[] a = inStr.toCharArray();
         for (int i = 0; i < a.length; i++) {
@@ -54,7 +54,7 @@ public class MD5Utils {
 
     }
 
-    public static String MD5(String sourceStr) {
+    public static String mD5(String sourceStr) {
         try {
             // 获得MD5摘要算法的 MessageDigest对象
             MessageDigest mdInst = MessageDigest.getInstance("MD5");
@@ -63,17 +63,7 @@ public class MD5Utils {
             // 获得密文
             byte[] md = mdInst.digest();
             // 把密文转换成十六进制的字符串形式
-            StringBuffer buf = new StringBuffer();
-//            for (int i = 0; i < md.length; i++) {
-//                int tmp = md[i];
-//                if (tmp < 0) {
-//                    tmp += 256;
-//                }
-//                if (tmp < 16) {
-//                    buf.append("0");
-//                }
-//                buf.append(Integer.toHexString(tmp));
-//            }
+            StringBuilder buf = new StringBuilder();
             for (int b : md) {
                 int tmp = b;
                 if (tmp < 0) {
@@ -97,24 +87,18 @@ public class MD5Utils {
      * encrypt译成密码
      */
     public String encrypt(String str) {
-        // MD5
-        String s1 = string2MD5(str);
-        //加密
-        String s2 = MD5(str);
 
-        String s = str;
-
-        LogUtils.e(TAG, "show: ------------原始：" + s);
-        LogUtils.e(TAG, "show: ------------MD5后：" + string2MD5(s));
-        LogUtils.e(TAG, "show: ------------加密的：" + convertMD5(s));
-        LogUtils.e(TAG, "show: ------------解密的：" + convertMD5(convertMD5(s)));
+        LogUtils.e(TAG, "show: ------------原始：" + str);
+        LogUtils.e(TAG, "show: ------------MD5后：" + string2Md5(str));
+        LogUtils.e(TAG, "show: ------------加密的：" + convertMd5(str));
+        LogUtils.e(TAG, "show: ------------解密的：" + convertMd5(convertMd5(str)));
         // return convertMD5(convertMD5(s));
-        return convertMD5(s);
+        return convertMd5(str);
         //return string2MD5(s);
     }
 
     public String decode(String unlock) {
-        LogUtils.e(TAG, "这是解密--------------*****---------" + convertMD5(unlock));
-        return convertMD5(unlock);
+        LogUtils.e(TAG, "这是解密--------------*****---------" + convertMd5(unlock));
+        return convertMd5(unlock);
     }
 }

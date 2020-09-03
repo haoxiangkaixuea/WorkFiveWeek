@@ -12,11 +12,13 @@ import java.util.Map;
 
 import cn.edu.scujcc.workfiveweek.util.LogUtils;
 
+/**
+ * @author Administrator
+ */
 public class SharedPreferenceActivity extends AppCompatActivity {
     private static final String TAG = "SecretSharedPreference";
     private EditText inputUsername;
     private EditText inputPassword;
-    private Button btnSubmit;
     private TextView tvShow;
 
     @Override
@@ -27,10 +29,8 @@ public class SharedPreferenceActivity extends AppCompatActivity {
         inputUsername = findViewById(R.id.editText_username);
         inputPassword = findViewById(R.id.editText_password);
         tvShow = findViewById(R.id.show_message);
-        btnSubmit = findViewById(R.id.button_submit);
-        btnSubmit.setOnClickListener(v -> {
-            saveInSecurityPreference();
-        });
+        Button btnSubmit = findViewById(R.id.button_submit);
+        btnSubmit.setOnClickListener(v -> saveInSecurityPreference());
     }
 
     private void saveInSecurityPreference() {

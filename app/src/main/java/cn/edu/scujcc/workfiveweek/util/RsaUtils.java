@@ -18,7 +18,7 @@ import javax.crypto.Cipher;
  *
  * @author Administrator
  */
-public class RSAUtils {
+public class RsaUtils {
     /**
      * 非对称加密密钥算法
      */

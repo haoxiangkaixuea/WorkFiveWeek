@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 import cn.edu.scujcc.workfiveweek.util.LogUtils;
-import cn.edu.scujcc.workfiveweek.util.MD5Utils;
+import cn.edu.scujcc.workfiveweek.util.Md5Utils;
 
 /**
  * 自动加密SharedPreference
@@ -44,7 +44,9 @@ public class SecuritySharedPreference implements SharedPreferences {
         }
     }
 
-    //清空存储的内容
+    /**
+     * 清空存储的内容
+     */
     public static void clear(Context context, String name) {
         SecuritySharedPreference preferences = new SecuritySharedPreference(context, name, Context.MODE_PRIVATE);
         SecuritySharedPreference.Editor editor = preferences.edit();
@@ -55,7 +57,7 @@ public class SecuritySharedPreference implements SharedPreferences {
     @Override
     public Map<String, String> getAll() {
         final Map<String, ?> encryptMap = mSharedPreferences.getAll();
-        final Map<String, String> decryptMap = new HashMap<>();
+        final Map<String, String> decryptMap = new HashMap<>(16);
         for (Map.Entry<String, ?> entry : encryptMap.entrySet()) {
             Object cipherText = entry.getValue();
             if (cipherText != null) {
@@ -71,7 +73,7 @@ public class SecuritySharedPreference implements SharedPreferences {
      * @return cipherText base64
      */
     private String encryptPreference(String plainText) {
-        MD5Utils md5Utils = new MD5Utils();
+        Md5Utils md5Utils = new Md5Utils();
         return md5Utils.encrypt(plainText);
     }
 
@@ -81,7 +83,7 @@ public class SecuritySharedPreference implements SharedPreferences {
      * @return plainText
      */
     private String decryptPreference(String cipherText) {
-        MD5Utils md5Utils = new MD5Utils();
+        Md5Utils md5Utils = new Md5Utils();
         return md5Utils.decode(cipherText);
     }
 

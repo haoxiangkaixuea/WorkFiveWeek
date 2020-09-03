@@ -13,7 +13,7 @@ import java.security.interfaces.RSAPublicKey;
 
 import cn.edu.scujcc.workfiveweek.util.Base64Utils;
 import cn.edu.scujcc.workfiveweek.util.LogUtils;
-import cn.edu.scujcc.workfiveweek.util.RSAUtils;
+import cn.edu.scujcc.workfiveweek.util.RsaUtils;
 
 public class RsaActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "RsaActivity";
@@ -38,13 +38,13 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
         btnPublicLock.setOnClickListener(this);
         btnPrivateLock.setOnClickListener(this);
         btnPrivateUnlock.setOnClickListener(this);
-        textRSA();
+        textRsa();
     }
 
-    public void textRSA() {
+    public void textRsa() {
         text = getResources().getString(R.string.test_RSA);
 
-        KeyPair keyPair = RSAUtils.generateRsaKeyPair(RSAUtils.DEFAULT_KEY_SIZE);
+        KeyPair keyPair = RsaUtils.generateRsaKeyPair(RsaUtils.DEFAULT_KEY_SIZE);
         // 公钥
         assert keyPair != null;
         publicKey = (RSAPublicKey) keyPair.getPublic();
@@ -60,7 +60,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                     //公钥加密
                     byte[] encryptBytes = new byte[0];
                     try {
-                        encryptBytes = RSAUtils.encryptByPublicKeyForSpilt(text.getBytes(), publicKey.getEncoded());
+                        encryptBytes = RsaUtils.encryptByPublicKeyForSpilt(text.getBytes(), publicKey.getEncoded());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -72,7 +72,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                     //私钥解密
                     byte[] decryptBytes = new byte[0];
                     try {
-                        decryptBytes = RSAUtils.decryptByPrivateKeyForSpilt(Base64Utils.decode(entrySlr), privateKey.getEncoded());
+                        decryptBytes = RsaUtils.decryptByPrivateKeyForSpilt(Base64Utils.decode(entrySlr), privateKey.getEncoded());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -84,7 +84,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                     //私钥加密
                     byte[] encryptBytes2 = new byte[0];
                     try {
-                        encryptBytes2 = RSAUtils.encryptByPrivateKeyForSpilt(text.getBytes(), privateKey.getEncoded());
+                        encryptBytes2 = RsaUtils.encryptByPrivateKeyForSpilt(text.getBytes(), privateKey.getEncoded());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -96,7 +96,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                     //公钥解密
                     byte[] decryptBytes2 = new byte[0];
                     try {
-                        decryptBytes2 = RSAUtils.decryptByPublicKeyForSpilt(Base64Utils.decode(entrySlr), publicKey.getEncoded());
+                        decryptBytes2 = RsaUtils.decryptByPublicKeyForSpilt(Base64Utils.decode(entrySlr), publicKey.getEncoded());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
