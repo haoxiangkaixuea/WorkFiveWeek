@@ -16,6 +16,7 @@ import cn.edu.scujcc.workfiveweek.util.Base64Utils;
 import cn.edu.scujcc.workfiveweek.util.RSAUtils;
 
 public class RsaActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "RsaActivity";
     private TextView tvName;
     private RSAPublicKey publicKey;
     private RSAPrivateKey privateKey;
@@ -41,7 +42,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     public void textRSA() {
-        text = "测试加密 RSA";
+        text = getResources().getString(R.string.test_RSA);
 
         KeyPair keyPair = RSAUtils.generateRSAKeyPair(RSAUtils.DEFAULT_KEY_SIZE);
         // 公钥
@@ -63,7 +64,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
                     entrySlr = Base64Utils.encode(encryptBytes);
-                    Log.d("RSA", "加密后的数据：" + entrySlr);
+                    Log.d(TAG, getResources().getString(R.string.lock_after) + entrySlr);
                     tvName.setText(entrySlr);
                     break;
                 case R.id.button2:
@@ -75,7 +76,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
                     String decryStr = new String(decryptBytes);
-                    Log.d("RSA", "解密后的数据：" + decryStr);
+                    Log.d(TAG, getResources().getString(R.string.unlock_after) + decryStr);
                     tvName.setText(decryStr);
                     break;
                 case R.id.button3:
@@ -87,7 +88,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
                     entrySlr = Base64Utils.encode(encryptBytes2);
-                    Log.d("RSA", "加密后的数据：" + entrySlr);
+                    Log.d(TAG, getResources().getString(R.string.lock_after) + entrySlr);
                     tvName.setText(entrySlr);
                     break;
                 case R.id.button4:
@@ -99,7 +100,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
                     decryStr = new String(decryptBytes2);
-                    Log.d("RSA", "解密后的数据：" + decryStr);
+                    Log.d(TAG, getResources().getString(R.string.unlock_after) + decryStr);
                     tvName.setText(decryStr);
                     break;
                 default:

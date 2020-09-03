@@ -63,7 +63,7 @@ public class AidlActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_add:
-                int code = Integer.valueOf(codeEt.getText().toString().trim());
+                int code = Integer.parseInt(codeEt.getText().toString().trim());
                 String name = nameEt.getText().toString().trim();
                 try {
                     proxy.setStudent(new Student(code, name));
@@ -87,7 +87,6 @@ public class AidlActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
                 break;
-
             default:
                 break;
         }
