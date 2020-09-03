@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -15,6 +14,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import cn.edu.scujcc.workfiveweek.util.LogUtils;
 import cn.edu.scujcc.workfiveweek.util.MD5Utils;
 
 /**
@@ -166,7 +166,7 @@ public class SecuritySharedPreference implements SharedPreferences {
         Map<String, ?> oldMap = mSharedPreferences.getAll();
         Map<String, String> newMap = new HashMap<>();
         for (Map.Entry<String, ?> entry : oldMap.entrySet()) {
-            Log.i(TAG, "key:" + entry.getKey() + ", value:" + entry.getValue());
+            LogUtils.i(TAG, "key:" + entry.getKey() + ", value:" + entry.getValue());
             newMap.put(encryptPreference(entry.getKey()), encryptPreference(entry.getValue().toString()));
         }
         Editor editor = mSharedPreferences.edit();

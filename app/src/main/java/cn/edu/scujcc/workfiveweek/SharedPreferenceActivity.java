@@ -2,7 +2,6 @@ package cn.edu.scujcc.workfiveweek;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,6 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Map;
+
+import cn.edu.scujcc.workfiveweek.util.LogUtils;
 
 public class SharedPreferenceActivity extends AppCompatActivity {
     private static final String TAG = "SecretSharedPreference";
@@ -39,7 +40,7 @@ public class SharedPreferenceActivity extends AppCompatActivity {
         securityEditor.putString("password", inputPassword.getText().toString());
         securityEditor.apply();
         Map a = securitySharedPreference.getAll();
-        Log.d(TAG, String.valueOf(a));
+        LogUtils.d(TAG, String.valueOf(a));
         tvShow.setText(String.valueOf(a));
         SecuritySharedPreference.clear(getApplicationContext(), "security_prefs");
     }

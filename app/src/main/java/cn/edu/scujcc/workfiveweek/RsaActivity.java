@@ -1,7 +1,6 @@
 package cn.edu.scujcc.workfiveweek;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,6 +12,7 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 
 import cn.edu.scujcc.workfiveweek.util.Base64Utils;
+import cn.edu.scujcc.workfiveweek.util.LogUtils;
 import cn.edu.scujcc.workfiveweek.util.RSAUtils;
 
 public class RsaActivity extends AppCompatActivity implements View.OnClickListener {
@@ -64,7 +64,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
                     entrySlr = Base64Utils.encode(encryptBytes);
-                    Log.d(TAG, getResources().getString(R.string.lock_after) + entrySlr);
+                    LogUtils.d(TAG, getResources().getString(R.string.lock_after) + entrySlr);
                     tvName.setText(entrySlr);
                     break;
                 case R.id.button2:
@@ -76,7 +76,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
                     String decryStr = new String(decryptBytes);
-                    Log.d(TAG, getResources().getString(R.string.unlock_after) + decryStr);
+                    LogUtils.d(TAG, getResources().getString(R.string.unlock_after) + decryStr);
                     tvName.setText(decryStr);
                     break;
                 case R.id.button3:
@@ -88,7 +88,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
                     entrySlr = Base64Utils.encode(encryptBytes2);
-                    Log.d(TAG, getResources().getString(R.string.lock_after) + entrySlr);
+                    LogUtils.d(TAG, getResources().getString(R.string.lock_after) + entrySlr);
                     tvName.setText(entrySlr);
                     break;
                 case R.id.button4:
@@ -100,7 +100,7 @@ public class RsaActivity extends AppCompatActivity implements View.OnClickListen
                         e.printStackTrace();
                     }
                     decryStr = new String(decryptBytes2);
-                    Log.d(TAG, getResources().getString(R.string.unlock_after) + decryStr);
+                    LogUtils.d(TAG, getResources().getString(R.string.unlock_after) + decryStr);
                     tvName.setText(decryStr);
                     break;
                 default:

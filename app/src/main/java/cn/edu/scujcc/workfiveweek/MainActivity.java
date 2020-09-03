@@ -2,7 +2,6 @@ package cn.edu.scujcc.workfiveweek;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -10,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cn.edu.scujcc.workfiveweek.util.AesUtils;
+import cn.edu.scujcc.workfiveweek.util.LogUtils;
 import cn.edu.scujcc.workfiveweek.util.MD5Utils;
 
 /**
@@ -61,24 +61,24 @@ public class MainActivity extends AppCompatActivity {
         //加密明文--> 密文
         String aesLock = getResources().getString(R.string.lock_before);
         aesLock = AesUtils.encrypt(aesLock, key);
-        Log.d(TAG, getResources().getString(R.string.lock_after) + aesLock);
+        LogUtils.d(TAG, getResources().getString(R.string.lock_after) + aesLock);
         tvLock.setText(aesLock);
 
         String aesUnlock = AesUtils.decrypt(aesLock, key);
-        Log.d(TAG, getResources().getString(R.string.unlock_after) + aesUnlock);
+        LogUtils.d(TAG, getResources().getString(R.string.unlock_after) + aesUnlock);
         tvUnlock.setText(aesUnlock);
     }
 
     private void setMD5() {
         String getData = inputLock.getText().toString().trim();
-        Log.d(TAG, getResources().getString(R.string.lock_before) + getData);
+        LogUtils.d(TAG, getResources().getString(R.string.lock_before) + getData);
         String md5 = MD5Utils.string2MD5(getData);
-        Log.d(TAG, getResources().getString(R.string.md5_after) + md5);
+        LogUtils.d(TAG, getResources().getString(R.string.md5_after) + md5);
         String md5Lock = md5Utils.encrypt(getData);
-        Log.d(TAG, getResources().getString(R.string.lock_after) + md5Lock);
+        LogUtils.d(TAG, getResources().getString(R.string.lock_after) + md5Lock);
         tvLock.setText(md5Lock);
         String md5Unlock = md5Utils.decode(md5Lock);
         tvUnlock.setText(md5Unlock);
-        Log.d(TAG, getResources().getString(R.string.public_unlock) + md5Unlock);
+        LogUtils.d(TAG, getResources().getString(R.string.public_unlock) + md5Unlock);
     }
 }

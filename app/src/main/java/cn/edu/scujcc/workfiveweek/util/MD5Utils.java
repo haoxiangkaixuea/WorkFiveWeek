@@ -1,7 +1,5 @@
 package cn.edu.scujcc.workfiveweek.util;
 
-import android.util.Log;
-
 import java.security.MessageDigest;
 
 /**
@@ -14,7 +12,7 @@ public class MD5Utils {
      * MD5加码 生成32位md5码
      */
     public static String string2MD5(String inStr) {
-        Log.d(TAG, "string2MD5: -------------------------");
+        LogUtils.d(TAG, "string2MD5: -------------------------");
         MessageDigest md5 = null;
         try {
             md5 = MessageDigest.getInstance("MD5");
@@ -47,7 +45,7 @@ public class MD5Utils {
      * 加密解密算法 执行一次加密，两次解密
      */
     public static String convertMD5(String inStr) {
-        Log.e(TAG, "convertMD5: ----------------------------------------------------------");
+        LogUtils.e(TAG, "convertMD5: ----------------------------------------------------------");
         char[] a = inStr.toCharArray();
         for (int i = 0; i < a.length; i++) {
             a[i] = (char) (a[i] ^ 't');
@@ -105,17 +103,17 @@ public class MD5Utils {
 
         String s = str;
 
-        Log.e(TAG, "show: ------------原始：" + s);
-        Log.e(TAG, "show: ------------MD5后：" + string2MD5(s));
-        Log.e(TAG, "show: ------------加密的：" + convertMD5(s));
-        Log.e(TAG, "show: ------------解密的：" + convertMD5(convertMD5(s)));
+        LogUtils.e(TAG, "show: ------------原始：" + s);
+        LogUtils.e(TAG, "show: ------------MD5后：" + string2MD5(s));
+        LogUtils.e(TAG, "show: ------------加密的：" + convertMD5(s));
+        LogUtils.e(TAG, "show: ------------解密的：" + convertMD5(convertMD5(s)));
         // return convertMD5(convertMD5(s));
         return convertMD5(s);
         //return string2MD5(s);
     }
 
     public String decode(String unlock) {
-        Log.e(TAG, "这是解密--------------*****---------" + convertMD5(unlock));
+        LogUtils.e(TAG, "这是解密--------------*****---------" + convertMD5(unlock));
         return convertMD5(unlock);
     }
 }
