@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import cn.edu.scujcc.workfiveweek.constant.Constants;
+
 /**
  * Base64工具类
  *
@@ -38,7 +40,7 @@ public class Base64Utils {
             }
         }
 
-        if (i == start + len - 2) {
+        if (i == start + len - Constants.TWO) {
             int d = ((((int) data[i]) & 0x0ff) << 16)
                     | ((((int) data[i + 1]) & 255) << 8);
             buf.append(LEGAL_CHARS[(d >> 18) & 63]);
@@ -56,11 +58,11 @@ public class Base64Utils {
     }
 
     private static int decode(char c) {
-        if (c >= 'A' && c <= 'Z') {
+        if (c >= Constants.A && c <= Constants.Z) {
             return ((int) c) - 65;
-        } else if (c >= 'a' && c <= 'z') {
+        } else if (c >= Constants.a && c <= Constants.z) {
             return ((int) c) - 97 + 26;
-        } else if (c >= '0' && c <= '9') {
+        } else if (c >= Constants.ZERO && c <= Constants.NIGHT) {
             return ((int) c) - 48 + 26 + 26;
         } else {
             switch (c) {

@@ -169,13 +169,13 @@ public class SecuritySharedPreference implements SharedPreferences {
      */
     public void handleTransition() {
         Map<String, ?> oldMap = mSharedPreferences.getAll();
-        Map<String, String> newMap = new HashMap<>();
+        Map<String, String> newMap = new HashMap<>(16);
         for (Map.Entry<String, ?> entry : oldMap.entrySet()) {
             LogUtils.i(TAG, "key:" + entry.getKey() + ", value:" + entry.getValue());
             newMap.put(encryptPreference(entry.getKey()), encryptPreference(entry.getValue().toString()));
         }
         Editor editor = mSharedPreferences.edit();
-        editor.clear().commit();
+        editor.clear().apply();
         for (Map.Entry<String, String> entry : newMap.entrySet()) {
             editor.putString(entry.getKey(), entry.getValue());
         }

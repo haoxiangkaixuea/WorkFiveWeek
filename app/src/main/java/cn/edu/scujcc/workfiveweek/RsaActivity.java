@@ -15,6 +15,9 @@ import cn.edu.scujcc.workfiveweek.util.Base64Utils;
 import cn.edu.scujcc.workfiveweek.util.LogUtils;
 import cn.edu.scujcc.workfiveweek.util.RsaUtils;
 
+/**
+ * @author Administrator
+ */
 public class RsaActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "RsaActivity";
     private TextView tvName;

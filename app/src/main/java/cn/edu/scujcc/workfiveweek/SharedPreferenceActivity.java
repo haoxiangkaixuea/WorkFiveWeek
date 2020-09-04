@@ -39,7 +39,7 @@ public class SharedPreferenceActivity extends AppCompatActivity {
         securityEditor.putString("username", inputUsername.getText().toString());
         securityEditor.putString("password", inputPassword.getText().toString());
         securityEditor.apply();
-        Map a = securitySharedPreference.getAll();
+        Map<String, ?> a = securitySharedPreference.getAll();
         LogUtils.d(TAG, String.valueOf(a));
         tvShow.setText(String.valueOf(a));
         SecuritySharedPreference.clear(getApplicationContext(), "security_prefs");
