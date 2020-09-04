@@ -103,7 +103,7 @@ public class Base64Utils {
         int i = 0;
         int len = s.length();
         while (true) {
-            while (i < len && s.charAt(i) <= ' ') {
+            while (i < len && s.charAt(i) <= Constants.NULL) {
                 i++;
             }
             if (i == len) {

@@ -12,4 +12,5 @@ public class Constants {
     public static final int z = 'z';
     public static final int ZERO = '0';
     public static final int NIGHT = '9';
+    public static final int NULL = ' ';
 }
